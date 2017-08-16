@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.primary.dao.StuScoreDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.primary.bean.StuScoreDetail" >
+    <result column="stuId" property="stuid" jdbcType="INTEGER" />
+    <result column="classId" property="classid" jdbcType="INTEGER" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="mark" property="mark" jdbcType="REAL" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="courseName" property="coursename" jdbcType="VARCHAR" />
+    <result column="className" property="classname" jdbcType="VARCHAR" />
+    <result column="gradeName" property="gradename" jdbcType="VARCHAR" />
+    <result column="sessnName" property="sessnname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    stuId, classId, number, mark, name, courseName, className, gradeName, sessnName
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.primary.bean.StuScoreDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from stu_score_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.primary.bean.StuScoreDetailExample" >
+    delete from stu_score_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.primary.bean.StuScoreDetail" >
+    insert into stu_score_detail (stuId, classId, number, 
+      mark, name, courseName, 
+      className, gradeName, sessnName
+      )
+    values (#{stuid,jdbcType=INTEGER}, #{classid,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, 
+      #{mark,jdbcType=REAL}, #{name,jdbcType=VARCHAR}, #{coursename,jdbcType=VARCHAR}, 
+      #{classname,jdbcType=VARCHAR}, #{gradename,jdbcType=VARCHAR}, #{sessnname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.primary.bean.StuScoreDetail" >
+    insert into stu_score_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stuid != null" >
+        stuId,
+      </if>
+      <if test="classid != null" >
+        classId,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="mark != null" >
+        mark,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="coursename != null" >
+        courseName,
+      </if>
+      <if test="classname != null" >
+        className,
+      </if>
+      <if test="gradename != null" >
+        gradeName,
+      </if>
+      <if test="sessnname != null" >
+        sessnName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stuid != null" >
+        #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="classid != null" >
+        #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="mark != null" >
+        #{mark,jdbcType=REAL},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="coursename != null" >
+        #{coursename,jdbcType=VARCHAR},
+      </if>
+      <if test="classname != null" >
+        #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="gradename != null" >
+        #{gradename,jdbcType=VARCHAR},
+      </if>
+      <if test="sessnname != null" >
+        #{sessnname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.primary.bean.StuScoreDetailExample" resultType="java.lang.Integer" >
+    select count(*) from stu_score_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update stu_score_detail
+    <set >
+      <if test="record.stuid != null" >
+        stuId = #{record.stuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.classid != null" >
+        classId = #{record.classid,jdbcType=INTEGER},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.mark != null" >
+        mark = #{record.mark,jdbcType=REAL},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coursename != null" >
+        courseName = #{record.coursename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classname != null" >
+        className = #{record.classname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gradename != null" >
+        gradeName = #{record.gradename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sessnname != null" >
+        sessnName = #{record.sessnname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update stu_score_detail
+    set stuId = #{record.stuid,jdbcType=INTEGER},
+      classId = #{record.classid,jdbcType=INTEGER},
+      number = #{record.number,jdbcType=INTEGER},
+      mark = #{record.mark,jdbcType=REAL},
+      name = #{record.name,jdbcType=VARCHAR},
+      courseName = #{record.coursename,jdbcType=VARCHAR},
+      className = #{record.classname,jdbcType=VARCHAR},
+      gradeName = #{record.gradename,jdbcType=VARCHAR},
+      sessnName = #{record.sessnname,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
